@@ -36,7 +36,7 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         $credentials = $request->except(['_token']);
-        $user = User::where('email',$request->email)->where('status','active')->first();
+        $user = User::where('email',$request->email)->first();
         if(isset($user)){
             if (auth()->attempt($credentials)) {
                 return redirect()->route('home');
@@ -44,7 +44,7 @@ class LoginController extends Controller
                 return back()->with('error' , __('passwords.user'));
             }
         }else{
-            return back()->with('error' , __('lang.email_verify'));
+            return back()->with('error' , __('lang.email_or_password_error'));
         }
 
     }

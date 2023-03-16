@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('title')
-    {{ __('dashboard.admins') }}
+    {{ __('dashboard.languages') }}
 @endsection
 
 @section('css')
@@ -57,7 +57,7 @@
                         <a href="{{ route('dashboard') }}" class="text-muted">{{ __('dashboard.dashboard') }}</a>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <span class="text-muted">{{ __('dashboard.admins') }}</span>
+                        <span class="text-muted">{{ __('dashboard.languages') }}</span>
                     </li>
                     @if (request()->filled('type'))
                         <li class="breadcrumb-item text-muted">
@@ -67,9 +67,9 @@
                 </ul>
             </div>
             <div class="d-flex align-items-center">
-                <a href="{{ route('dashboard.admins.create') }}" style="border: 0;"
+                <a href="{{ route('dashboard.languages.create') }}" style="border: 0;"
                     class="btn btn-primary font-weight-bolder btn-sm"><i class="fa fa-plus"></i>
-                    {{ __('dashboard.add_admin') }} </a>
+                    {{ __('dashboard.add_language') }} </a>
             </div>
             <!--end::Info-->
 
@@ -83,7 +83,7 @@
                 <div class="col-md-12 project-list">
                     <div class="card">
                         <div class="row">
-                            <form action="{{route('dashboard.admins.index')}}" class="form-inline col-md-12" method="get">
+                            <form action="{{route('dashboard.languages.index')}}" class="form-inline col-md-12" method="get">
                                 <div class="media col-md-12">
                                     <div class="form-group mb-0 col-md-4">
                                         <input type="text" value="{{app('request')->input('search')? app('request')->input('search') : ''}}" name="search" placeholder="{{__('dashboard.search')}}..." id="" class="form-control">
@@ -107,10 +107,10 @@
 
                 <div class="container">
                         <div class="card email-body radius-left">
-                        <form action="{{ route('dashboard.admins.destroy_multi') }}" method="POST">
+                        <form action="{{ route('dashboard.languages.destroy_multi') }}" method="POST">
                             @csrf
                             <div class="card-header mb-5" style="padding: 20px !important">
-                                <h5 class="mb-0">{{__('dashboard.admins')}}</h5>
+                                <h5 class="mb-0">{{__('dashboard.languages')}}</h5>
                             </div>
                             <span id="btn-delete-all">
                                 <div class="row">
@@ -126,9 +126,8 @@
                                             <thead class="flip-content">
                                                 <tr>
                                                     <th><input type="checkbox" class="w3-check" style="color: #e1e1e1!important" id="CheckAll"></th>
-                                                    <th>{{ __('dashboard.name') }}</th>
-                                                    <th>{{ __('dashboard.email') }}</th>
-                                                    <th>{{ __('dashboard.language') }}</th>
+                                                    <th>{{ __('dashboard.title') }}</th>
+                                                    <th>{{ __('dashboard.slogan') }}</th>
                                                     <th>{{ __('dashboard.actions') }}</th>
                                                 </tr>
                                             </thead>
@@ -140,22 +139,22 @@
                                                     </td>
                                                     <td>
                                                         <div class="media" style="text-align: {{ app()->getLocale() == 'ar'? 'right' : 'left'}} ">
+                                                            <img class="" src="{{ $item->img? asset($item->img) : url('images/default_square.png') }}" style="width: 50px;" alt="">
                                                             <div class="media-body" style="margin: auto;padding-{{ app()->getLocale() == 'ar'? 'right' : 'left'}}: 10px;">
                                                                 <b class="w3-large">
-                                                                    {{$item->name}}
+                                                                    {{$item->title}}
                                                                 </b>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><p>{{ $item->email }}</p></td>
-                                                    <td><p>{{ optional($item->language)->title }}</p></td>
+                                                    <td><p>{{ $item->slogan }}</p></td>
 
                                                     <td>
-                                                        <a href="{{ route('dashboard.admins.index') }}?admin_id={{ $item->id }}"
+                                                        <a href="{{ route('dashboard.languages.index') }}?language_id={{ $item->id }}"
                                                             class="button btn btnstyle w3-text-white" style="background: #2bc620">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a href="{{ route('dashboard.admins.edit',$item->id) }}"
+                                                        <a href="{{ route('dashboard.languages.edit',$item->id) }}"
                                                             class="button btn btnstyle w3-text-white" style="background: #26529b">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
@@ -194,12 +193,12 @@
         </div>
     @endif
     </div>
-    @include('dashboard.admins.show')
+    @include('dashboard.languages.show')
 @endsection
 
 @section('js')
 <script>
-    @if (request()->admin_id > 0)
+    @if (request()->language_id > 0)
         $('.show-modal').modal('show');
     @endif
 </script>
@@ -218,7 +217,7 @@
             if (result.isConfirmed) {
                 var id = $(this).data("id");
                 console.log(id);
-                var url = "{{ route('dashboard.admins.destroy', ":id") }}";
+                var url = "{{ route('dashboard.languages.destroy', ":id") }}";
                 url = url.replace(':id', id);
                 $.ajax({
                     type:'POST',

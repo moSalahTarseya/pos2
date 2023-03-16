@@ -124,7 +124,6 @@
                                                     <th><input type="checkbox" class="w3-check" style="color: #e1e1e1!important" id="CheckAll"></th>
                                                     <th>{{ __('dashboard.name') }}</th>
                                                     <th>{{ __('dashboard.email') }}</th>
-                                                    <th>{{ __('dashboard.phone') }}</th>
                                                     <th>{{ __('dashboard.actions') }}</th>
                                                 </tr>
                                             </thead>
@@ -136,7 +135,6 @@
                                                     </td>
                                                     <td>
                                                         <div class="media" style="text-align: {{ app()->getLocale() == 'ar'? 'right' : 'left'}} ">
-                                                            <img class="rounded-circle" src="{{ $item->image? asset($item->image) : url('images/user.png') }}" style="width: 50px;" alt="">
                                                             <div class="media-body" style="margin: auto;padding-{{ app()->getLocale() == 'ar'? 'right' : 'left'}}: 10px;">
                                                                 <b class="w3-large">
                                                                     {{$item->name}}
@@ -145,8 +143,6 @@
                                                         </div>
                                                     </td>
                                                     <td><p>{{ $item->email }}</p></td>
-                                                    <td><p>{{ $item->phone }}</p></td>
-
                                                     <td>
                                                         <a href="{{ route('dashboard.users.index') }}?user_id={{ $item->id }}"
                                                             class="button btn btnstyle w3-text-white" style="background: #2bc620">

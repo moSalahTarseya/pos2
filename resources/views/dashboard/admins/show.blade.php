@@ -22,22 +22,11 @@
                                             <div class="show active" id="content-1" role="tabpanel" aria-labelledby="content-1-tab">
                                                 <div class="">
                                                     <div class="flex items-center">
-                                                        <img class="w3-round" src="{{ $admin->image? asset($admin->image) : url('images/user.png') }}" style="width: 50px;" alt="">
-                                                        <h3>{{ $admin->username }}</h3>
+                                                        <h3>{{ $admin->name }}</h3>
                                                     </div>
 
                                                     <div class="text_view">
                                                         <p><strong> {{ __('dashboard.email') }} : </strong> {{ $admin->email }}</p>
-                                                    </div>
-                                                    <div class="text_view">
-                                                        <p><strong> {{ __('dashboard.phone') }} : </strong> {{ $admin->phone }}</p>
-                                                    </div>
-                                                    <div class="text_view">
-                                                        <p><strong> {{ __('dashboard.country_code') }} : </strong> {{ optional($admin->countryCode)->country_name }}</p>
-                                                    </div>
-
-                                                    <div class="text_view">
-                                                        <p><strong> {{ __('dashboard.role') }} : </strong> {{(App::getLocale()  == 'ar') ? optional(auth()->user()->roles()->first())->description : optional(auth()->user()->roles()->first())->name}}</p>
                                                     </div>
                                                 </div>
                                             </div>

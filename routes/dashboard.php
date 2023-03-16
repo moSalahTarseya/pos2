@@ -29,22 +29,6 @@ Route::group(['middleware' => 'auth:admin'], function () use ($prefix) {
     Route::get('/website', 'WebsiteController@index')->name($prefix . 'website');
 
 
-    // Roles Route
-    Route::group(['prefix' => 'roles'], function () {
-        $controller = 'RoleController@';
-        $route = 'dashboard.roles.';
-        $permission = '-roles';
-        Route::get('/', $controller . 'index')->name($route.'index');
-        Route::get('create', $controller . 'create')->name($route . 'create');
-        Route::post('store', $controller . 'store')->name($route . 'store');
-        Route::get('{id}/edit', $controller . 'edit')->name($route . 'edit');
-        Route::get('/show/{id}', $controller . 'show')->name($route . 'show');
-        Route::post('{id}/update', $controller . 'update')->name($route . 'update');
-        Route::post('{id}/delete', $controller . 'destroy')->name($route . 'destroy');
-        Route::post('deletes', $controller . 'destroyMulti')->name($route . 'destroy_multi');
-    });
-
-
 
     // Admins Route
     Route::group(['prefix' => 'admins'], function () {
@@ -60,20 +44,44 @@ Route::group(['middleware' => 'auth:admin'], function () use ($prefix) {
         Route::post('deletes', $controller . 'destroyMulti')->name($route . 'destroy_multi');
     });
 
+    // Language Route
+    Route::group(['prefix' => 'languages'], function () {
+        $controller = 'LanguageController@';
+        $route = 'dashboard.languages.';
+        Route::get('/', $controller . 'index')->name($route. 'index');
+        Route::get('create', $controller . 'create')->name($route . 'create');
+        Route::post('store', $controller . 'store')->name($route . 'store');
+        Route::get('{id}/edit', $controller . 'edit')->name($route . 'edit');
+        Route::post('{id}/update', $controller . 'update')->name($route . 'update');
+        Route::post('{id}/delete', $controller . 'destroy')->name($route . 'destroy');
+        Route::post('deletes', $controller . 'destroyMulti')->name($route . 'destroy_multi');
+    });
+
+    // Product Route
+    Route::group(['prefix' => 'products'], function () {
+        $controller = 'ProductController@';
+        $route = 'dashboard.products.';
+        Route::get('/', $controller . 'index')->name($route. 'index');
+        Route::get('create', $controller . 'create')->name($route . 'create');
+        Route::post('store', $controller . 'store')->name($route . 'store');
+        Route::get('{id}/edit', $controller . 'edit')->name($route . 'edit');
+        Route::post('{id}/update', $controller . 'update')->name($route . 'update');
+        Route::post('{id}/delete', $controller . 'destroy')->name($route . 'destroy');
+        Route::post('deletes', $controller . 'destroyMulti')->name($route . 'destroy_multi');
+    });
+
 
 
     // Users Route
     Route::group(['prefix' => 'users'], function () {
         $controller = 'UserController@';
         $route = 'dashboard.users.';
-        $permission = '-users';
         Route::get('/', $controller . 'index')->name($route. 'index');
         Route::get('{id}/show', $controller . 'show')->name($route . 'show');
         Route::get('{id}/edit', $controller . 'edit')->name($route . 'edit');
         Route::post('{id}/update', $controller . 'update')->name($route . 'update');
-        Route::post('{id}/delete', $controller . 'delete')->name($route . 'delete');
-        Route::post('deletes', $controller . 'destroy')->name($route . 'destroy');
-        Route::get('delete-users', $controller . 'destroyMulti')->name($route . 'destroy_multi');
+        Route::post('{id}/delete', $controller . 'destroy')->name($route . 'destroy');
+        Route::get('deletes', $controller . 'destroyMulti')->name($route . 'destroy_multi');
     });
 
 

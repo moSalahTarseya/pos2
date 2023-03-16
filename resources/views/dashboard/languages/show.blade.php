@@ -6,7 +6,7 @@
                 <h5 class="modal-title">
                     <div class="row">
                         <div class="col-md-12">
-                            <b>{{ __('dashboard.user_info') }}</b>
+                            <b>{{ __('dashboard.language_info') }}</b>
                         </div>
                     </div>
                 </h5>
@@ -22,11 +22,13 @@
                                             <div class="show active" id="content-1" role="tabpanel" aria-labelledby="content-1-tab">
                                                 <div class="">
                                                     <div class="flex items-center">
-                                                        <h3>{{ $user->name }}</h3>
+                                                        <img class="w3-round" src="{{ $language->img? asset($language->img) : url('images/default_square.png') }}" style="width: 50px;" alt="">
+
+                                                        <h3>{{ $language->title }}</h3>
                                                     </div>
 
                                                     <div class="text_view">
-                                                        <p><strong> {{ __('dashboard.email') }} : </strong> {{ $user->email }}</p>
+                                                        <p><strong> {{ __('dashboard.slogan') }} : </strong> {{ $language->slogan }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -40,7 +42,7 @@
                     </div>
                   </div>
             <div class="modal-footer">
-                <a href="{{ route('dashboard.users.index') }}" class="btn btn-secondary" type="button" data-bs-dismiss="modal" data-bs-original-title=""
+                <a href="{{ route('dashboard.languages.index') }}" class="btn btn-secondary" type="button" data-bs-dismiss="modal" data-bs-original-title=""
                     title="">{{ __('dashboard.close') }}</a>
             </div>
         </div>

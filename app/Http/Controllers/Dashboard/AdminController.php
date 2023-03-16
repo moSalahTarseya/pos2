@@ -3,24 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Country;
-use App\Models\Department;
-use App\Models\Job;
-use App\Models\Role;
 use App\Models\Admin;
-use App\Models\CountryCode;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware(['permission:dashboard_read-admins'])->only('index');
-        $this->middleware(['permission:dashboard_create-admins'])->only('create');
-        $this->middleware(['permission:dashboard_update-admins'])->only('edit');
-        $this->middleware(['permission:dashboard_delete-admins'])->only('destroy');
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -49,10 +39,9 @@ class AdminController extends Controller
     public function create()
     {
         $resource =  new Admin();
+        $languages = Language::latest()->get();
 
-        $roles = Role::latest()->get();
-        $countryCodes = CountryCode::latest()->get();
-        return view('dashboard.admins.form',compact('resource','countryCodes', 'roles'));
+        return view('dashboard.admins.form',compact('resource', 'languages'));
     }
 
     /**
@@ -73,19 +62,9 @@ class AdminController extends Controller
         $data = $request->except(['image', 'password']);
 
         try {
-            if($request->file('image')){
-                $requestFileName = $request->file('image');
 
-                $realName = $requestFileName->getClientOriginalName();
-                $file = $requestFileName;
-                $filename = $requestFileName->hashName();
-                $file->move("uploads/dashboard/admins/", $filename);
-                $fullpath = "uploads/dashboard/admins/" . $filename;
-                $data['image'] = $fullpath;
-            }
             $data['password'] = bcrypt($request->password);
             $resource = Admin::create($data);
-            $resource->attachRole($data['role']);
 
 
             session()->flash('success',__('lang.done'));
@@ -116,12 +95,8 @@ class AdminController extends Controller
     public function edit($id)
     {
         $resource =  Admin::where('id',$id)->first();
-        $roleId = $resource->roles()->first()->id ?? 0;
-
-        $roles = Role::latest()->get();
-        $countryCodes = CountryCode::latest()->get();
-
-        return view('dashboard.admins.form', compact('resource','roleId',  'roles', 'countryCodes'));
+        $languages = Language::latest()->get();
+        return view('dashboard.admins.form', compact('resource', 'languages'));
     }
 
     /**
@@ -140,33 +115,17 @@ class AdminController extends Controller
         }
         // dd($request->all());
 
-        $data = $request->except(['image', 'password']);
+        $data = $request->except(['password']);
 
         try {
             $resource = Admin::where('id',$id)->first();
 
-            if($request->file('image')){
-                if($resource->image){
-                    $path = $resource->image? public_path($resource->image) : null;
-                    if($path){
-                        unlink($path);
-                    }
-                }
-                $requestFileName = $request->file('image');
 
-                $realName = $requestFileName->getClientOriginalName();
-                $file = $requestFileName;
-                $filename = $requestFileName->hashName();
-                $file->move("uploads/dashboard/admins/", $filename);
-                $fullpath = "uploads/dashboard/admins/" . $filename;
-                $data['image'] = $fullpath;
-            }
             if($request->password){
                 $data['password'] = bcrypt($request->password);
             }
 
             $resource->update($data);
-            $resource->syncRoles([$data['role']]);
 
 
             session()->flash('success',__('lang.done'));
@@ -212,10 +171,9 @@ class AdminController extends Controller
 
     public function rules ($userId){
         return [
-            'username'=>'required|string|max:150',
-            'image' => 'required_if:id,==,null|image|mimes:jpeg,jpg,png',
+            'name'=>'required|string|max:150',
             "email" =>'required|unique:admins,email,' . $userId ,
-            'phone' => 'required|unique:admins,phone,' . $userId ,
+            "language_id" =>'nullable',
         ];
     }
 
@@ -223,7 +181,6 @@ class AdminController extends Controller
         return [
             'required'=>'this input must be required',
             'string'=>'this input must be string',
-            'image' => 'this input must be image',
             "email" =>'this input must be email',
             'unique' => 'this input must be unique',
         ];

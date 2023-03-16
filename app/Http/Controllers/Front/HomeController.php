@@ -39,22 +39,6 @@ class HomeController extends Controller
         try {
             $resource = User::where('id', $id)->first();
 
-            if ($request->file('image')) {
-                if ($resource->image) {
-                    $path = $resource->image ? public_path($resource->image) : null;
-                    if ($path) {
-                        unlink($path);
-                    }
-                }
-                $requestFileName = $request->file('image');
-
-                $realName = $requestFileName->getClientOriginalName();
-                $file = $requestFileName;
-                $filename = $requestFileName->hashName();
-                $file->move("uploads/dashboard/users/", $filename);
-                $fullpath = "uploads/dashboard/users/" . $filename;
-                $data['image'] = $fullpath;
-            }
 
             if ($request->password) {
                 $data['password'] = bcrypt($request->password);
@@ -79,7 +63,6 @@ class HomeController extends Controller
             'name' => 'required|string|max:150',
             'image' => 'required_if:id,==,null|image|mimes:jpeg,jpg,png',
             "email" => 'required|unique:users,email,' . $userId,
-            'phone' => 'required|unique:users,phone,' . $userId,
         ];
     }
 

@@ -36,6 +36,14 @@ return[
     "login"  =>  "تسجيل الدخول",
     "register"  =>  "انشاء حساب جديد",
     "products"  =>  "المنتجات",
+
+    "languages"  =>  "اللغات",
+    "language"  =>  "لغه",
+    "add_language"  =>  "اضافة لغه",
+    "edit_language"  =>  "تعديل لغه",
+    "language_info"  =>  "بيانات اللغة",
+    "email_or_password_error"  =>  "خطا في البريد الالكتروني او كلمه السر",
+    ""  =>  "",
     ""  =>  "",
     ""  =>  "",
 ];

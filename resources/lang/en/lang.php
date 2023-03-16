@@ -21,6 +21,15 @@ return[
     "videos"=>"Videos",
     "show"=>"Show",
     "welcome_to_our_store"=>"Welcome to Our Store",
+
+    "languages"=>"Languages",
+    "language"=>"Language",
+    "add_language"=>"Add Language",
+    "edit_language"=>"Edit Language",
+    "language_info"=>"Language Information",
+    "email_or_password_error"=>"email or password error",
+    ""=>"",
+    ""=>"",
     ""=>"",
     ""=>"",
 ];

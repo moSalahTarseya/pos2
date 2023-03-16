@@ -19,9 +19,6 @@
                             <a href="{{ route('dashboard') }}" class="text-muted">{{ __('dashboard.dashboard') }}</a>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('dashboard.settings.index') }}" class="text-muted">{{ __('dashboard.settings') }}</a>
-                        </li>
-                        <li class="breadcrumb-item text-muted">
                             <a href="{{ route('dashboard.admins.index') }}"
                                 class="text-muted">{{ __('dashboard.admins') }}</a>
                         </li>
@@ -63,36 +60,17 @@
                     @csrf
                     {!! Form::hidden('id', $resource->id, []) !!}
                     <div class="row">
-                        <div class="col-12 col-xs-12 col-md-12  pt-3">
-                            <img src="{{ asset($resource->image) }}" class="img-100 rounded-circle image-preview"
-                                alt="">
-                            <br>
-                            <label>{{ __('dashboard.image') }} :*</label><br>
-                            <label for="fileId" class="btn w3-blue"><i data-feather="upload-cloud"></i></label>
-                            <input id="fileId" style="display:none" {{ !$resource->id ? 'required' : '' }} type="file"
-                                name="image" class="form-control image" accept="image/jpeg,png,jpg">
-                        </div>
+
 
                         <div class="row">
                             <div class="col-12 col-xs-12 col-md-4  pt-3">
                                 <label>{{ __('dashboard.name') }} :*</label>
-                                {!! Form::text('username', $resource->id ? $resource->username : old('username'), [
+                                {!! Form::text('name', $resource->id ? $resource->name : old('name'), [
                                     'class' => 'form-control',
                                     'required',
                                     'placeholder' => __('dashboard.name'),
                                     'maxlength' => '150',
                                 ]) !!}
-                            </div>
-                            <div class="col-12 col-xs-12 col-md-4  pt-3">
-                                <label for="">{{ __('dashboard.role') }} :*</label>
-                                <select name="role" id="role" class="form-select myselect2">
-                                    @foreach ($roles as $role)
-                                        <option {{ $role->id == old('role', isset($roleId) ? $roleId : '') ? 'selected' : '' }}
-                                            value="{{ $role->id }}">
-                                            {{ app()->getLocale() == 'ar' ? $role->description : $role->display_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
                             </div>
                             <div class="col-12 col-xs-12 col-md-4  pt-3">
                                 <label>{{ __('dashboard.email') }} :*</label>
@@ -109,22 +87,14 @@
                                     value="" class="form-control"
                                     placeholder="{{ __('dashboard.password') }}">
                             </div>
-                            <div class="col-12 col-xs-12 col-md-4  pt-3">
-                                <label>{{ __('dashboard.phone') }} </label>
-                                {!! Form::text('phone', $resource->id ? $resource->phone : old('phone'), [
-                                    'class' => 'form-control',
-                                    'placeholder' => __('dashboard.phone'),
-                                    'maxlength' => '150',
-                                ]) !!}
-                            </div>
                             <div class="col-12 col-xs-12 col-md-4 pt-3">
-                                <label>{{ __('dashboard.country_code') }}</label>
-                                <select class="form-control" name="country_code" id="countryCode">
-                                    <option value="">{{ __('dashboard.select_country') }}</option>
-                                    @foreach ($countryCodes as $countryCode)
-                                        <option value="{{ $countryCode->id }}"
-                                            {{ $resource->id && $resource->country_code == $countryCode->id ? 'selected' : '' }}>
-                                            {{ $countryCode->country_name }}</option>
+                                <label>{{ __('dashboard.language') }}</label>
+                                <select class="form-control" name="language_id" id="language">
+                                    <option value="">{{ __('dashboard.select_language') }}</option>
+                                    @foreach ($languages as $language)
+                                        <option value="{{ $language->id }}"
+                                            {{ $resource->id && $resource->language_id == $language->id ? 'selected' : '' }}>
+                                            {{ $language->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -156,17 +126,15 @@
 @section('js')
 
     <script>
-        $('#role').select2();
-
-        var countryCodes = <?php echo json_encode($countryCodes->pluck('image', 'id')->toArray()); ?>;
+        var languages = <?php echo json_encode($languages->pluck('img_url', 'id')->toArray()); ?>;
 
         $(document).ready(function() {
-            select2("#countryCode", {
+            select2("#language", {
                 enable_image: true,
-                row: function(resource) {
+                row:function(resource) {
                     var span = resource.id ?
-                        '<span><img src="' + countryCodes[resource.id] + '" class="w3-round" >' + resource
-                        .text + '</span>' :
+                        '<span><img src="'+languages[resource.id]+'" class="w3-round" >' +
+                            resource.text + '</span>' :
                         '<span>' + resource.text + '</span>';
                     return $(span);
                 }

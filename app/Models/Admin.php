@@ -32,5 +32,11 @@ class Admin extends Authenticatable
 
 
 
+    public function language(){
+        return $this->belongsTo(Language::class);
+    }
+
+
+
 
 }

@@ -31,10 +31,34 @@
 
 
                         <li class="sidebar-list">
+                            <a class="sidebar-link   sidebar-title link-nav {{request()->routeIs('dashboard.languages.*')? 'active' : ''}} "
+                                href="{{route('dashboard.languages.index')}}">
+                                <i data-feather="globe"> </i>
+                                <span style="font-family:  'Tajawal', sans-serif;">{{ trans('dashboard.languages') }}</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list">
+                            <a class="sidebar-link   sidebar-title link-nav {{request()->routeIs('dashboard.admins.*')? 'active' : ''}} "
+                                href="{{route('dashboard.admins.index')}}">
+                                <i data-feather="users"> </i>
+                                <span style="font-family:  'Tajawal', sans-serif;">{{ trans('dashboard.admins') }}</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list">
                             <a class="sidebar-link   sidebar-title link-nav {{request()->routeIs('dashboard.users.*')? 'active' : ''}} "
                                 href="{{route('dashboard.users.index')}}">
                                 <i data-feather="users"> </i>
                                 <span style="font-family:  'Tajawal', sans-serif;">{{ trans('dashboard.users') }}</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list">
+                            <a class="sidebar-link   sidebar-title link-nav {{request()->routeIs('dashboard.products.*')? 'active' : ''}} "
+                                href="{{route('dashboard.products.index')}}">
+                                <i data-feather="shopping-cart"> </i>
+                                <span style="font-family:  'Tajawal', sans-serif;">{{ trans('dashboard.products') }}</span>
                             </a>
                         </li>
 

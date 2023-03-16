@@ -371,47 +371,9 @@
                         <div class="col-md-12 pt-2 ">
                             <div class="card-body ">
                                 <ul class="nav nav-pills" id="sidTab">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="myConsultations-tab" data-toggle="tab" data-target="#myConsultations" type="button" role="tab" aria-controls="myConsultations" aria-selected="true" style="text-decoration: none">
-                                            <div class="customer-review ">
-                                                <div class="stare ">
-                                                   <div class="person-info">
-                                                    <span  data-feather="calendar" style="display: inline-block"></span>
-                                                    <span class="mr-2 ml-2">{{ __('lang.my_consultations') }}</span>
-                                               </div>
-                                               </div>
-                                            </div>
-                                            <hr>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="notification-tab" data-toggle="tab" data-target="#notification" type="button" role="tab" aria-controls="notification" aria-selected="true" style="text-decoration: none">
-                                            <div class="customer-review ">
-                                                <div class="stare ">
-                                                   <div class="person-info">
-                                                    <span  data-feather="bell" style="display: inline-block"></span>
-                                                    <span class="mr-2 ml-2">{{ __('lang.notification') }}</span>
-                                               </div>
-                                               </div>
-                                               <hr>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="my_follow-tab" data-toggle="tab" data-target="#my_follow" type="button" role="tab" aria-controls="my_follow" aria-selected="true" style="text-decoration: none">
-                                            <div class="customer-review ">
-                                                <div class="stare ">
-                                                   <div class="person-info">
-                                                    <span  data-feather="folder-minus" style="display: inline-block"></span>
-                                                    <span class="mr-2 ml-2">{{ __('lang.my_follow') }}</span>
-                                               </div>
-                                               </div>
-                                               <hr>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="my_account-tab" data-toggle="tab" data-target="#my_account" type="button" role="tab" aria-controls="my_account" aria-selected="true" style="text-decoration: none">
+
+                                    <li class="nav-item ">
+                                        <a class="nav-link active" id="my_account-tab" data-toggle="tab" data-target="#my_account" type="button" role="tab" aria-controls="my_account" aria-selected="true" style="text-decoration: none">
                                             <div class="customer-review ">
                                                 <div class="stare ">
                                                    <div class="person-info">
@@ -453,16 +415,8 @@
         <div class="col-md-10 col-sm-12">
             <div class="card border-0 w3-round-xxlarge p-lg-4 p-sm-2  {{ $dir=='rtl' ?'text-right' :'text-left' }}" style="min-height: 97%;">
                 <div class="tab-content" id="sidTabContent">
-                    <div class="tab-pane fade show active" id="myConsultations" role="tabpanel" aria-labelledby="myConsultations-tab">
-                        @include('front.profile.consultations_tab')
-                    </div>
-                    <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
-                        @include('front.profile.notifications_tab')
-                    </div>
-                    <div class="tab-pane fade" id="my_follow" role="tabpanel" aria-labelledby="my_follow-tab">
-                        @include('front.profile.my_follow_tab')
-                    </div>
-                    <div class="tab-pane fade" id="my_account" role="tabpanel" aria-labelledby="my_account-tab">
+
+                    <div class="tab-pane active" id="my_account" role="tabpanel" aria-labelledby="my_account-tab">
                         @include('front.profile.my_account_tab')
                     </div>
                 </div>

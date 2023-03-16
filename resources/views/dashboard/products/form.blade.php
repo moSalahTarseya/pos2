@@ -1,9 +1,9 @@
 @extends('dashboard.layouts.master')
 @section('title')
     @if ($resource->id)
-        {{ __('dashboard.edit_user') }}
+        {{ __('dashboard.edit_product') }}
     @else
-        {{ __('dashboard.add_user') }}
+        {{ __('dashboard.add_product') }}
     @endif
 @stop
 @section('content')
@@ -19,15 +19,15 @@
                             <a href="{{ route('dashboard') }}" class="text-muted">{{ __('dashboard.dashboard') }}</a>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('dashboard.users.index') }}"
-                                class="text-muted">{{ __('dashboard.users') }}</a>
+                            <a href="{{ route('dashboard.products.index') }}"
+                                class="text-muted">{{ __('dashboard.products') }}</a>
                         </li>
                         <li class="breadcrumb-item text-muted">
                             <span class="text-muted">
                                 @if ($resource->id)
-                                    {{ __('dashboard.edit_user') }}
+                                    {{ __('dashboard.edit_product') }}
                                 @else
-                                    {{ __('dashboard.add_user') }}
+                                    {{ __('dashboard.add_product') }}
                                 @endif
                             </span>
                         </li>
@@ -48,19 +48,28 @@
         <div class="card">
             <div class="card-header">
                 @if ($resource->id)
-                    <h4><b> {{ __('dashboard.edit_user') }}</b></h4>
+                    <h4><b> {{ __('dashboard.edit_product') }}</b></h4>
                 @else
-                    <h4><b>{{ __('dashboard.add_user') }}</b></h4>
+                    <h4><b>{{ __('dashboard.add_product') }}</b></h4>
                 @endif
             </div>
             <div class="card-body p-4">
                 <form class="form" method="post"
-                    action="{{route('dashboard.users.update', $resource->id)}}"
+                    action="{{ $resource->id ? route('dashboard.products.update', $resource->id) : route('dashboard.products.store') }}"
                     enctype="multipart/form-data">
                     @csrf
                     {!! Form::hidden('id', $resource->id, []) !!}
                     <div class="row">
 
+                        <div class="col-12 col-xs-12 col-md-12  pt-3">
+                            <img src="{{ asset($resource->img) }}" class="img-100 rounded-circle image-preview"
+                                alt="">
+                            <br>
+                            <label>{{ __('dashboard.image') }} :*</label><br>
+                            <label for="fileId" class="btn w3-blue"><i data-feather="upload-cloud"></i></label>
+                            <input id="fileId" style="display:none" {{ !$resource->id ? 'required' : '' }} type="file"
+                                name="img" class="form-control image" >
+                        </div>
 
                         <div class="row">
                             <div class="col-12 col-xs-12 col-md-4  pt-3">
@@ -73,21 +82,35 @@
                                 ]) !!}
                             </div>
                             <div class="col-12 col-xs-12 col-md-4  pt-3">
-                                <label>{{ __('dashboard.email') }} :*</label>
-                                {!! Form::email('email', $resource->id ? $resource->email : old('email'), [
+                                <label>{{ __('dashboard.price') }} :*</label>
+                                {!! Form::number('price', $resource->id ? $resource->price : old('price'), [
                                     'class' => 'form-control',
                                     'required',
-                                    'placeholder' => __('dashboard.email'),
+                                    'placeholder' => __('dashboard.price'),
+                                    'step' => 'any',
+                                    'min' => '0',
+                                ]) !!}
+                            </div>
+                            <div class="col-12 col-xs-12 col-md-4 pt-3">
+                                <label>{{ __('dashboard.language') }}</label>
+                                <select class="form-control" name="language_id" id="language">
+                                    <option value="">{{ __('dashboard.select_language') }}</option>
+                                    @foreach ($languages as $language)
+                                        <option value="{{ $language->id }}"
+                                            {{ $resource->id && $resource->language_id == $language->id ? 'selected' : '' }}>
+                                            {{ $language->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-xs-12 col-md-12  pt-3">
+                                <label>{{ __('dashboard.description') }} :*</label>
+                                {!! Form::textarea('description', $resource->id ? $resource->description : old('description'), [
+                                    'class' => 'form-control',
+                                    'required',
+                                    'placeholder' => __('dashboard.description'),
                                     'maxlength' => '150',
                                 ]) !!}
                             </div>
-                            <div class="col-12 col-xs-12 col-md-4  pt-3 form-group">
-                                <label>{{ __('dashboard.password') }} :*</label>
-                                <input type="password" name="password"
-                                    value="" class="form-control"
-                                    placeholder="{{ __('dashboard.password') }}">
-                            </div>
-
 
                         </div>
 
@@ -116,13 +139,21 @@
 
 @section('js')
 
-    <script>
-        $('#role').select2();
+<script>
+    var languages = <?php echo json_encode($languages->pluck('img_url', 'id')->toArray()); ?>;
 
-
-        $(document).ready(function() {
-
+    $(document).ready(function() {
+        select2("#language", {
+            enable_image: true,
+            row:function(resource) {
+                var span = resource.id ?
+                    '<span><img src="'+languages[resource.id]+'" class="w3-round" >' +
+                        resource.text + '</span>' :
+                    '<span>' + resource.text + '</span>';
+                return $(span);
+            }
         });
-    </script>
+    });
+</script>
 
 @stop
