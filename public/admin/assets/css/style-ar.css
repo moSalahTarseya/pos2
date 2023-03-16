@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+body,p,h1,h2,h3,h4,h5,h6,input,button,a,form,textarea{
+    font-family: 'Cairo', sans-serif;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option{
+    text-align: right;
+}
+
+.btn-select-all{
+    display: block;
+    position: absolute;
+    left: 10px;
+    right: unset !important;
+    top:5%;
+}
+
+.reload_page{
+    position: absolute;
+    right: -20px;
+    top: 56%;
+    cursor: pointer;
+    width: 25px;
+}
+
+.remove_answer{
+    position: absolute;
+    top: 40px;
+    right: -10px;
+}

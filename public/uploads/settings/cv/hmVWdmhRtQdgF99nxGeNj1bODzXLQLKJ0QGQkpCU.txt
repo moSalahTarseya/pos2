@@ -1,0 +1,36 @@
+done ->
+- github
+- laravel updated to v9
+- slider 
+- our work limitation for 6 in home page
+- pagination created in /portfolio
+- soft delete system
+- starting at multiple portfolio
+- OUR CLIENTS slide fixed
+
+
+
+
+
+
+
+==========================================
+tasks ->
+
+
+
+
+==========================================
+
+needed ->
+- Kernel : uncomment LaravelPageSpeed 
+==========================================
+
+note:
+Service array in packages in dashboard not found (/dashboard/packages)
+error in second slide in home page
+no multi check
+dashboard not responsive
+no routes for features
+destroy clients do not remove its image
+model offer doesn't exist

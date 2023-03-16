@@ -1,0 +1,7 @@
+<svg id="Group_7" data-name="Group 7" xmlns="http://www.w3.org/2000/svg" width="23.3" height="25.3" viewBox="0 0 23.3 25.3">
+  <path id="Rectangle_12" data-name="Rectangle 12" d="M6-.65H16A6.658,6.658,0,0,1,22.65,6V16A6.658,6.658,0,0,1,16,22.65H6A6.658,6.658,0,0,1-.65,16V6A6.658,6.658,0,0,1,6-.65Zm10,22A5.356,5.356,0,0,0,21.35,16V6A5.356,5.356,0,0,0,16,.65H6A5.356,5.356,0,0,0,.65,6V16A5.356,5.356,0,0,0,6,21.35Z" transform="translate(0.65 2.65)" fill="#516beb"/>
+  <path id="Line_1" data-name="Line 1" d="M0,4.65A.65.65,0,0,1-.65,4V0A.65.65,0,0,1,0-.65.65.65,0,0,1,.65,0V4A.65.65,0,0,1,0,4.65Z" transform="translate(17.65 0.65)" fill="#516beb"/>
+  <path id="Line_2" data-name="Line 2" d="M0,4.65A.65.65,0,0,1-.65,4V0A.65.65,0,0,1,0-.65.65.65,0,0,1,.65,0V4A.65.65,0,0,1,0,4.65Z" transform="translate(5.65 0.65)" fill="#516beb"/>
+  <path id="Line_3" data-name="Line 3" d="M22,.65H0A.65.65,0,0,1-.65,0,.65.65,0,0,1,0-.65H22a.65.65,0,0,1,.65.65A.65.65,0,0,1,22,.65Z" transform="translate(0.65 8.65)" fill="#516beb"/>
+  <path id="Line_4" data-name="Line 4" d="M4,.65H0A.65.65,0,0,1-.65,0,.65.65,0,0,1,0-.65H4A.65.65,0,0,1,4.65,0,.65.65,0,0,1,4,.65Z" transform="translate(9.65 16.65)" fill="#516beb"/>
+</svg>
